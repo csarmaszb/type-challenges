@@ -19,7 +19,7 @@
 
 /* _____________ Your Code Here _____________ */
 
-type Reverse<T> = any
+type Reverse<T> = T extends [infer f, ...infer rest] ? [...Reverse<rest>, f] : []
 
 /* _____________ Test Cases _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'

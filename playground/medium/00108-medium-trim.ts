@@ -18,7 +18,12 @@
 
 /* _____________ Your Code Here _____________ */
 
-type Trim<S extends string> = any
+type Trim<S extends string> = S extends ` ${infer tail}` ? Trim<tail> : 
+  S extends `\n${infer tail}` ? Trim<tail> :
+  S extends `\t${infer tail}` ? Trim<tail> :
+  S extends `${infer tail}\n` ? Trim<tail> :
+  S extends `${infer tail}\t` ? Trim<tail> :
+  (S extends `${infer tail} ` ? Trim<tail> : S)
 
 /* _____________ Test Cases _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'
